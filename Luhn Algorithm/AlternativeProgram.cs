@@ -12,23 +12,12 @@ while (string.IsNullOrEmpty(card) || !cardPattern.IsMatch(card))
 }
 
 card = card.Replace("-", "");
-string cardNumberReverse = "";
-for (int i = card.Length - 1; i >= 0; i--)
-{
-    cardNumberReverse += card[i];
-}
-
 int cardNumbersSummary = 0;
-for (int i = 1; i <= cardNumberReverse.Length; i++)
+for (int i = 1; i <= card.Length; i++)
 {
     if (i % 2 == 1)
     {
-        cardNumbersSummary += Convert.ToInt32(cardNumberReverse[i - 1].ToString());
-        continue;
-    }
-    else
-    {
-        int cardNumberMultiplierCheck = Convert.ToInt32(cardNumberReverse[i - 1].ToString()) * 2;
+        int cardNumberMultiplierCheck = Convert.ToInt32(card[i - 1].ToString()) * 2;
         if (cardNumberMultiplierCheck >= 0)
         {
             int firstDigit = cardNumberMultiplierCheck / 10;
@@ -37,6 +26,10 @@ for (int i = 1; i <= cardNumberReverse.Length; i++)
             continue;
         }
         cardNumbersSummary += cardNumberMultiplierCheck;
+    }
+    else
+    {
+        cardNumbersSummary += Convert.ToInt32(card[i - 1].ToString());
     }
 }
 
